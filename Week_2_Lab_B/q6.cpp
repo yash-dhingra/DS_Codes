@@ -36,7 +36,7 @@ public:
 
     void del(int pos)
     {
-        struct node *ptr = new node;
+        struct node *ptr;
         ptr = head;
         if (pos == 0)
         {
@@ -48,7 +48,10 @@ public:
             {
                 ptr = ptr->next;
             }
-            struct node *ptr1 = new node;
+            struct node *ptr1, *ptr_delete;
+
+            ptr_delete = ptr->next;
+
             ptr1 = ptr;
             for (int i = 0; i < 2; i++)
             {
@@ -59,6 +62,8 @@ public:
                 }
             }
             ptr->next = ptr1;
+
+            delete (ptr_delete);
         }
     }
 
