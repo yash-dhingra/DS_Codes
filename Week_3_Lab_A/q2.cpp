@@ -73,20 +73,65 @@ public:
 
         } while (iter != head);
     }
+
+    Linked_List concat(Linked_List list)
+    {
+        Linked_List output;
+        Node *head1 = list.ret_head();
+        Node *iter1 = head1;
+
+        //        Lets push list first;
+        do
+        {
+            output.push(iter1->data);
+            iter1 = iter1->next;
+        } while (iter1 != head1);
+
+        Node *iter = head;
+        do
+        {
+            output.push(iter->data);
+            iter = iter->next;
+        } while (iter != head);
+
+        return output;
+    }
+
+    Node *ret_head()
+    {
+        return head;
+    }
 };
 
 int main()
 {
 
-    Linked_List list;
-    list.push(5);
-    list.push(10);
-    list.push(11);
+    Linked_List list1;
+    list1.push(5);
+    list1.push(10);
+    list1.push(11);
 
-    list.display();
+    cout << "List 1: ";
+
+    list1.display();
 
     cout << endl;
-    list.del();
 
-    list.display();
+    Linked_List list2;
+    list2.push(7);
+    list2.push(12);
+    list2.push(15);
+
+    cout << "List 2: ";
+
+    list2.display();
+
+    cout << endl;
+
+    cout << "After Concat: ";
+
+    Linked_List concat_list = list2.concat(list1);
+
+    concat_list.display();
+    cout << endl;
 }
