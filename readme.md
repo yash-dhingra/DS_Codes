@@ -11,8 +11,7 @@ To get started with the assignments, follow these steps:
 1. Clone this repository to your local machine using the following command:
 
 ```
-git clone https://github.com/your-username/ds-assignments-sem3.git
-
+git clone https://github.com/yash-dhingra/DS_Codes.git
 ```
 
 2. Navigate to the assignment folder you want to work on. For example, for the first assignment:
