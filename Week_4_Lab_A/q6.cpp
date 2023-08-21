@@ -156,13 +156,24 @@ int str_counter(string str, char s)
 
 int balanced_bracket(string str)
 {
-    int flag = 1;
+    int flag = 0;
+    if (str_counter(str, '(') == str_counter(str, ')'))
+        flag += 1;
+
     if (str_counter(str, '[') == str_counter(str, ']'))
-        flag = 1;
+        flag += 1;
+
+    if (str_counter(str, '{') == str_counter(str, '}'))
+        flag += 1;
+
+    if (flag == 3)
+        return 1;
+    else
+        return 0;
 }
 
 int main()
 {
 
-    balanced_bracket("[dsfd]");
+    cout << balanced_bracket("[d(sfd]");
 }
