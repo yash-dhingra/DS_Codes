@@ -6,37 +6,37 @@ struct node
     int data;
     struct node *next;
 };
-class linked_list
+class stack
 {
 
-    struct node *head;
+    struct node *top;
 
 public:
     void insert(int new_data)
     {
         struct node *new_node = new node;
         new_node->data = new_data;
-        new_node->next = head;
-        head = new_node;
+        new_node->next = top;
+        top = new_node;
     }
     void display()
     {
         struct node *ptr;
-        ptr = head;
+        ptr = top;
         while (ptr != NULL)
         {
             cout << ptr->data << " ";
             ptr = ptr->next;
         }
     }
-    linked_list()
+    stack()
     {
-        head = NULL;
+        top = NULL;
     }
 };
 int main()
 {
-    linked_list list;
+    stack list;
     for (int i = 0; i < 10; i++)
     {
         list.insert(rand() % 10);
