@@ -94,11 +94,11 @@ void display(int array[], int len)
 
 int main()
 {
-    int array[] = {1, 27, 4, 3, 4, 5, 6, 74, 2, 10, 10};
+    int array[] = {3, 4, 5, 4, 2};
 
     //     innit(array, 10);
-    display(array, 11);
-    sort(array, 0, 11);
+    display(array, 5);
+    sort(array, 0, 4);
     cout << "\nafter sorting!!\n";
-    display(array, 11);
+    display(array, 5);
 }
