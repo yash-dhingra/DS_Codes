@@ -30,9 +30,10 @@ struct Node
 
 class stack
 {
-    Node *head, *tail;
 
 public:
+    Node *head, *tail;
+
     stack()
     {
         head = NULL;
@@ -67,6 +68,20 @@ public:
         }
     }
 
+    int top()
+    {
+        if (head != NULL)
+        {
+            return head->data;
+        }
+        return 0;
+    }
+
+    void pop_top()
+    {
+        head = head->next;
+    }
+
     void radix_sort()
     {
         int max_digits = 0;
@@ -78,33 +93,38 @@ public:
                     max_digits = count_digits(ptr->data));
             ptr = ptr->next;
         }
+        max_digits++;
         // Innitialize the Node array;
-        stack *ptr_array[max_digits][10];
-
-        for (int i = 0; i <= max_digits; i++)
-        {
-            for (int j = 0; j < 10; j++)
-            {
-                ptr_array[i][j] = new stack;
-            }
-        }
+        stack ptr_array[max_digits][10];
 
         // The sorting Begins
         ptr = head;
         while (ptr != NULL)
         {
-            ptr_array[0][digit_ret(ptr->data, 1)]->push(ptr->data);
-            cout << "Data: " << ptr->data << endl;
-            cout << "Digits: " << digit_ret(ptr->data, 1) << endl;
+            ptr_array[0][digit_ret(ptr->data, 1)].push(ptr->data);
+            //            cout << "Data: " << ptr->data << endl;
+            //            cout << "Digits: " << digit_ret(ptr->data, 1) << endl;
 
             ptr = ptr->next;
         }
-        ptr_array[0][6]->display();
 
         for (int i = 1; i <= max_digits; i++)
         {
-            continue;
+            for (int j = 0; j < 10; j++)
+            {
+
+                while (ptr_array[i - 1][j].head != NULL)
+                {
+                    //                    cout<< ptr_array[i-1][j].top()<<" ";
+                    ptr_array[i][digit_ret(ptr_array[i - 1][j].top(), i + 1)].push(ptr_array[i - 1][j].top());
+                    //                    cout << "i: "<<i<<"  j: "<<j<<endl;
+                    ptr_array[i - 1][j].pop_top();
+                }
+            }
         }
+
+        cout << "Sorted Array: ";
+        ptr_array[max_digits][0].display();
     }
 };
 
@@ -113,7 +133,8 @@ int main()
     stack stack;
     stack.push(100);
     stack.push(60);
+    stack.push(89);
+    stack.push(13284);
     stack.push(73);
     stack.radix_sort();
-    stack.display();
 }
