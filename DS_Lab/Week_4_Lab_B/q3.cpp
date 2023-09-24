@@ -3,7 +3,7 @@
 using namespace std;
 struct node
 {
-    int data;
+    char data;
     struct node *next;
 };
 class stack
@@ -12,7 +12,7 @@ class stack
     struct node *top;
 
 public:
-    void insert(int new_data)
+    void push(char new_data)
     {
         struct node *new_node = new node;
         new_node->data = new_data;
@@ -34,17 +34,31 @@ public:
         top = NULL;
     }
 
-    void pop(){
-        top=top->next;
+    void pop()
+    {
+        top = top->next;
+    }
+
+    char *reverse_string(string str)
+    {
+        stack st;
+        int len = str.length();
+        for (int i = 0; i < len; i++)
+        {
+            st.push(str[i]);
+        }
+        char ret[len];
+        for (int i = 0; i < len; i++)
+        {
+            ret[i] = st.top->data;
+            st.pop();
+        }
+        return ret;
     }
 };
 int main()
 {
     stack list;
-    for (int i = 0; i < 10; i++)
-    {
-        list.insert(rand() % 10);
-    }
 
-    list.display();
+    cout << list.reverse_string("hello World") << endl;
 }
