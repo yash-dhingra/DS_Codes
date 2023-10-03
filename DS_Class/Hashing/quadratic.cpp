@@ -8,19 +8,27 @@ void insert(int hashtable[], int data, int len)
     {
         for (int i = data % 10; i < len; i++)
         {
+            int temp_i = i;
+            i = i * i;
+            //            cout << "run"<<endl;
             if (hashtable[i] == -1)
             {
                 hashtable[i] = data;
                 return;
             }
+            i = temp_i;
         }
         for (int i = 0; i < data % 10; i++)
         {
+            int temp_i = i;
+            i = i * i;
+            //            cout << "run"<<endl;
             if (hashtable[i] == -1)
             {
                 hashtable[i] = data;
                 return;
             }
+            i = temp_i;
         }
     }
     else
@@ -33,20 +41,25 @@ int search(int hashtable[], int data, int len)
 {
     if (hashtable[data % 10] == data)
         return 1;
-    int flag = 0;
     for (int i = data % 10; i < len; i++)
     {
+        int temp_i = i;
+        i = i * i;
         if (hashtable[i] == data)
         {
             return 1;
         }
+        i = temp_i;
     }
     for (int i = 0; i < data % 10; i++)
     {
+        int temp_i = i;
+        i = i * i;
         if (hashtable[i] == data)
         {
             return 1;
         }
+        i = temp_i;
     }
 
     return 0;
@@ -64,6 +77,12 @@ int main()
         array[i] = rand() % 100;
         insert(hashtable, array[i], len);
     }
+    array[0] = 10;
+    insert(hashtable, array[0], len);
+
+    array[1] = 11;
+    insert(hashtable, array[1], len);
+
     array[len - 1] = 47;
     insert(hashtable, array[len - 1], len);
     for (int i = 0; i < len; i++)
@@ -78,5 +97,5 @@ int main()
     }
 
     cout << endl
-         << "Is 7 Present?: " << search(hashtable, 46, len) << endl;
+         << "Is 7 Present?: " << search(hashtable, 47, len) << endl;
 }
