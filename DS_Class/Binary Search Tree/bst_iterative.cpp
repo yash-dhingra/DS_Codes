@@ -120,35 +120,108 @@ public:
             i++;
         }
     }
-    int count_leaf_node_helper(Node *ptr)
+    Node *push_bst_helper(Node *ptr, int data)
     {
-        int x, y;
-        if (ptr != NULL)
+        if (ptr == NULL)
         {
-            x = count_leaf_node_helper(ptr->rp);
-            y = count_leaf_node_helper(ptr->lp);
-            if(ptr->rp==NULL && ptr->lp==NULL){
-                return 1+x+y;
-            }
-            else{
-                return x+y;
-            }
+            ptr = new Node;
+            ptr->data = data;
+            ptr->rp = ptr->lp = NULL;
+            //            cout << "Run";
         }
-        return 0;
+        else if (ptr->data < data)
+        {
+            ptr->rp = push_bst_helper(ptr->rp, data);
+        }
+        else if (ptr->data > data)
+        {
+            ptr->lp = push_bst_helper(ptr->lp, data);
+        }
+        return ptr;
     }
 
-    int count_node()
+    void push_bst(int data)
     {
-        return count_leaf_node_helper(head);
+        push_bst_helper(head, data);
+    }
+
+    void push_bst_iterative(int data)
+    {
+        Node *new_node = new Node;
+        new_node->data = data;
+        new_node->rp = new_node->lp = NULL;
+        if (head == NULL)
+        {
+            head = new_node;
+        }
+
+        else
+        {
+            Node *ptr = head;
+            Node *ptr2;
+            while (ptr != NULL)
+            {
+                ptr2 = ptr;
+                //                cout << ptr->data<<" ";
+                if (ptr->data > data)
+                {
+                    ptr = ptr->lp;
+                }
+                else if (ptr->data < data)
+                {
+                    ptr = ptr->rp;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (ptr2->data > data)
+            {
+                ptr2->lp = new Node;
+                ptr2->lp->data = data;
+            }
+            else if (ptr2->data < data)
+            {
+                ptr2->rp = new Node;
+                ptr2->rp->data = data;
+            }
+        }
+    }
+
+    void in_print_helper(Node *ptr)
+    {
+        if (ptr == NULL)
+            return;
+
+        in_print_helper(ptr->lp);
+        cout << ptr->data << " ";
+        in_print_helper(ptr->rp);
+    }
+    void in_print()
+    {
+        in_print_helper(head);
     }
 };
 
 int main()
 {
-    int array[] = {1, 2, 3, 4, 5, 6, 7};
+    int array[10];
+    for (int i = 0; i < 10; i++)
+    {
+        array[i] = rand() % 10;
+        cout << array[i] << " ";
+    }
+    cout << endl;
     int len = sizeof(array) / sizeof(array[0]);
     Tree tree;
-    tree.insert_list(array, len);
-
-    cout << "Number of Nodes Present in the Tree: " << tree.count_node() << endl;
+    int arr[] = {1};
+    tree.insert_list(arr, 1);
+    for (int i = 0; i < 10; i++)
+    {
+        tree.push_bst_iterative(array[i]);
+    }
+    cout << endl;
+    //    cout << "Number of Leaf Nodes Present in the Tree: " << tree.count_leaf_node() << endl;
+    tree.in_print();
 }

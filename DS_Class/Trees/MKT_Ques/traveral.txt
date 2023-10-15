@@ -1,0 +1,6 @@
+1. Depth Order
+2. Level Order
+3. Post Order 
+4. Pre Order
+5. In-Order
+6. Customized 
