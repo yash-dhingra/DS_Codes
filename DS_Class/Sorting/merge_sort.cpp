@@ -32,15 +32,6 @@ void merge(int arr[], int l, int mid, int r)
             k++;
             i++;
         }
-        //        else if (a[i] == b[j])
-        //        {
-        //            arr[k] = a[i];
-        //            k++;
-        //            arr[k] = a[i];
-        //            k++;
-        //            i++;
-        //            j++;
-        //        }
         else
         {
             arr[k] = b[j];
