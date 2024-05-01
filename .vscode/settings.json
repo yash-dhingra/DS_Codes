@@ -9,6 +9,13 @@
     "utility": "cpp",
     "vector": "cpp",
     "xutility": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "xtree": "cpp",
+    "deque": "cpp",
+    "initializer_list": "cpp",
+    "list": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "xhash": "cpp"
   }
 }
