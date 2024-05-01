@@ -18,7 +18,7 @@ int main()
     {
         w_p.insert(pair<int, int>(weights[i], profits[i]));
     }
-    map<int, int>::iterator iter;
+    map<int, int>::iterator iter = w_p.begin();
 
     vector<vector<int>> grid;
 
@@ -26,7 +26,7 @@ int main()
 
     for (int i = 0; i <= siz; i++)
     {
-        vector<int> temp(weight_needed, 0);
+        vector<int> temp(weight_needed + 1, 0);
         grid.push_back(temp);
     }
 
@@ -43,6 +43,8 @@ int main()
         }
         iter++;
     }
+
+    cout << grid[siz][weight_needed] << endl;
 
     return 1;
 }
