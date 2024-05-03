@@ -33,7 +33,7 @@ int main()
 
     for (int d = 1; d <= str_len - 1; d++)
     {
-        for (int i = 1; i < str_len; i++)
+        for (int i = 1; i < str_len-d; i++)
         {
             int j = i + d;
             grid[i][j] = grid[i][j - 1] + if_vowel(str[j - 1]);
