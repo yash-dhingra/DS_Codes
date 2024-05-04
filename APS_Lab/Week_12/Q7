@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    vector<TreeNode*> children;
+    TreeNode(int x) : val(x) {}
+};
+
+
+
+int dfs(TreeNode* node, int& min_rounds) {
+    if (node == nullptr)
+        return 0;
+
+    vector<int> child_depths;
+
+    for (TreeNode* child : node->children) {
+        child_depths.push_back(dfs(child, min_rounds));
+    }
+
+    if (child_depths.empty()) // Leaf node
+        return 1;
+
+    sort(child_depths.begin(), child_depths.end(), greater<int>());
+
+    int max_depth = child_depths[0];
+    for (int i = 1; i < child_depths.size(); ++i) {
+        if (child_depths[i] + i > max_depth)
+            max_depth = child_depths[i] + i;
+    }
+
+    min_rounds = max(min_rounds, max_depth);
+    return max_depth;
+}
+
+int minRounds(TreeNode* root) {
+    int min_rounds = 0;
+    dfs(root, min_rounds);
+    return min_rounds;
+}
+
+int main() {
+    // Example usage
+    TreeNode* root = new TreeNode(1);
+    root->children.push_back(new TreeNode(2));
+    root->children.push_back(new TreeNode(3));
+    root->children[0]->children.push_back(new TreeNode(4));
+    root->children[0]->children.push_back(new TreeNode(5));
+
+    cout << "Minimum rounds required: " << minRounds(root) << endl;
+
+    // Remember to free allocated memory to avoid memory leaks
+    // Code for memory deallocation not included in this example
+
+    return 0;
+}
+
